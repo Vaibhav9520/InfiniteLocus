@@ -1,11 +1,29 @@
-import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
+  const linkStyle = ({ isActive }) => ({
+    color: isActive ? '#646cff' : '#fff',
+    textDecoration: 'none',
+  });
+
   return (
-    <nav className="p-4 bg-blue-600 text-white flex gap-4">
-      <Link to="/" className="hover:underline">Menu</Link>
-      <Link to="/orders" className="hover:underline">Orders</Link>
-      <Link to="/history" className="hover:underline">History</Link>
+    <nav
+      style={{
+        display: 'flex',
+        gap: '1rem',
+        padding: '1rem',
+        justifyContent: 'center',
+      }}
+    >
+      <NavLink to="/" style={linkStyle}>
+        Menu
+      </NavLink>
+      <NavLink to="/orders" style={linkStyle}>
+        Orders
+      </NavLink>
+      <NavLink to="/history" style={linkStyle}>
+        History
+      </NavLink>
     </nav>
   );
 }

@@ -1,30 +1,39 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+export function AuthProvider({ children }) {
+  const [userId, setUserId] = useState('user-123'); // Mock user ID for development
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const login = (email, password) => {
-    // Fake login (replace with API)
-    if (email === "admin@canteen.com" && password === "admin123") {
-      setUser({ email, role: "admin" });
-    } else {
-      setUser({ email, role: "user" });
-    }
+  const login = (userData) => {
+    setUserId(userData.userId || 'user-123');
+    setIsAuthenticated(true);
   };
 
-  const signup = (email, password) => {
-    setUser({ email, role: "user" });
+  const logout = () => {
+    setUserId(null);
+    setIsAuthenticated(false);
   };
 
-  const logout = () => setUser(null);
+  const value = {
+    userId,
+    isAuthenticated,
+    login,
+    logout
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}

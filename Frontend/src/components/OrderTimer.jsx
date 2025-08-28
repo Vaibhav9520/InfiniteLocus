@@ -1,22 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-export default function OrderTimer({ expiresAt }) {
-  const [timeLeft, setTimeLeft] = useState("");
+export default function OrderTimer({ expiresAt, onExpired }) {
+  const [remainingMs, setRemainingMs] = useState(() => Math.max(0, new Date(expiresAt).getTime() - Date.now()))
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const diff = new Date(expiresAt) - new Date();
-      if (diff <= 0) {
-        setTimeLeft("Expired");
-        clearInterval(interval);
-      } else {
-        const mins = Math.floor(diff / 60000);
-        const secs = Math.floor((diff % 60000) / 1000);
-        setTimeLeft(`${mins}m ${secs}s`);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [expiresAt]);
+    const id = setInterval(() => {
+      const next = Math.max(0, new Date(expiresAt).getTime() - Date.now())
+      setRemainingMs(next)
+      if (next === 0) onExpired?.()
+    }, 1000)
+    return () => clearInterval(id)
+  }, [expiresAt, onExpired])
 
-  return <span className="text-red-500 font-semibold">{timeLeft}</span>;
+  const seconds = Math.floor(remainingMs / 1000) % 60
+  const minutes = Math.floor(remainingMs / 1000 / 60)
+  const pad = (n) => String(n).padStart(2, '0')
+
+  return <span>{pad(minutes)}:{pad(seconds)}</span>
 }
