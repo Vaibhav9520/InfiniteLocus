@@ -83,7 +83,7 @@ export default function HistoryPage({ history }) {
                         </span>
                         {item.price && (
                           <span className="font-medium text-gray-900">
-                            ${(item.price * item.quantity).toFixed(2)}
+                            Rs {(item.price * item.quantity).toFixed(2)}
                           </span>
                         )}
                       </div>
@@ -96,8 +96,8 @@ export default function HistoryPage({ history }) {
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center">
                     <span className="font-medium text-gray-900">Total:</span>
-                    <span className="text-lg font-bold text-orange-600">
-                      ${order.items.reduce((sum, item) => 
+                    <span className="text-lg font-bold text-gray-900">
+                      Rs {order.items.reduce((sum, item) => 
                         sum + ((item.price || 0) * item.quantity), 0
                       ).toFixed(2)}
                     </span>

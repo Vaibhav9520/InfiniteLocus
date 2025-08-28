@@ -22,4 +22,14 @@ const OrderSchema = new mongoose.Schema({
 
 OrderSchema.index({ userId: 1, status: 1 });
 
+OrderSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (_doc, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    return ret;
+  }
+});
+
 export const Order = mongoose.model('Order', OrderSchema);

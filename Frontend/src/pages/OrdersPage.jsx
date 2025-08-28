@@ -92,19 +92,19 @@ export default function OrdersPage({ orders, completeOrder }) {
                   {order.items.map((item, index) => (
                     <div key={index} className="flex justify-between text-sm">
                       <span>{item.name} × {item.quantity}</span>
-                      <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-medium">Rs {(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>
                 
                 <div className="flex justify-between items-center">
                   <div className="text-lg font-semibold text-gray-900">
-                    Total: ${order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}
+                    Total: Rs {order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}
                   </div>
                   {order.status === 'active' && (
                     <button
                       onClick={() => completeOrder(order.id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
                     >
                       Complete Order
                     </button>
@@ -125,10 +125,10 @@ export default function OrdersPage({ orders, completeOrder }) {
               <div key={item.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                 <div>
                   <h3 className="font-medium text-gray-900">{item.name}</h3>
-                  <p className="text-sm text-gray-600">${item.price} × {item.quantity}</p>
+                  <p className="text-sm text-gray-600">Rs {item.price} × {item.quantity}</p>
                 </div>
                 <span className="font-medium text-gray-900">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  Rs {(item.price * item.quantity).toFixed(2)}
                 </span>
               </div>
             ))}
@@ -137,7 +137,7 @@ export default function OrdersPage({ orders, completeOrder }) {
           <div className="border-t pt-4 mb-4">
             <div className="flex justify-between items-center mb-2">
               <span className="font-medium">Total:</span>
-              <span className="text-xl font-bold text-orange-600">${getCartTotal().toFixed(2)}</span>
+              <span className="text-xl font-bold text-gray-900">Rs {getCartTotal().toFixed(2)}</span>
             </div>
             <div className="text-sm text-gray-600">
               {getCartCount()} item{getCartCount() !== 1 ? 's' : ''}
@@ -147,7 +147,7 @@ export default function OrdersPage({ orders, completeOrder }) {
           <button
             disabled={loading || cart.length === 0}
             onClick={placeOrder}
-            className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? 'Placing Order...' : 'Place Order'}
           </button>
@@ -172,7 +172,7 @@ export default function OrdersPage({ orders, completeOrder }) {
             <button
               disabled={loading}
               onClick={() => onCancel(activeOrder.id)}
-              className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? 'Cancelling...' : 'Cancel Order'}
             </button>

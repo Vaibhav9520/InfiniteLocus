@@ -35,19 +35,19 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
-        <h1 className="text-2xl font-bold text-orange-600">
+      <header className="bg-white border-b border-gray-200 p-4 flex justify-between items-center sticky top-0 z-10">
+        <h1 className="text-2xl font-bold text-gray-900">
           🍴 InfiniteLocus Canteen
         </h1>
-        <nav className="space-x-4">
+        <nav className="space-x-2">
           <button
             onClick={() => setPage("menu")}
             className={`px-4 py-2 rounded-lg transition-colors ${
               page === "menu" 
-                ? "bg-orange-500 text-white" 
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                ? "bg-gray-900 text-white" 
+                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
             }`}
           >
             Menu
@@ -56,8 +56,8 @@ function AppContent() {
             onClick={() => setPage("orders")}
             className={`px-4 py-2 rounded-lg transition-colors ${
               page === "orders" 
-                ? "bg-orange-500 text-white" 
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                ? "bg-gray-900 text-white" 
+                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
             }`}
           >
             Orders
@@ -66,8 +66,8 @@ function AppContent() {
             onClick={() => setPage("history")}
             className={`px-4 py-2 rounded-lg transition-colors ${
               page === "history" 
-                ? "bg-orange-500 text-white" 
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                ? "bg-gray-900 text-white" 
+                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
             }`}
           >
             History
